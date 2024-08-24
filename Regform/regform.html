@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+<style>
+    body {
+        background-color: aquamarine;
+        font-family: Arial, sans-serif;
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    form {
+        background-color: rgba(255, 255, 255, 0.8); 
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 300px;
+    }
+
+    input {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="submit"] {
+        background-color: #14b1bd;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .error {
+        color: red;
+        font-size: 12px;
+    }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+    const app = document.getElementById("app");
+    const form = document.createElement("form");
+
+    const firstNameInput = document.createElement("input");
+    firstNameInput.type = "text";
+    firstNameInput.placeholder = "First Name";
+    form.appendChild(firstNameInput);
+
+    const lastNameInput = document.createElement("input");
+    lastNameInput.type = "text";
+    lastNameInput.placeholder = "Last Name";
+    form.appendChild(lastNameInput);
+
+    const emailInput = document.createElement("input");
+    emailInput.type = "email";
+    emailInput.placeholder = "Email Address";
+    form.appendChild(emailInput);
+
+    const passwordInput = document.createElement("input");
+    passwordInput.type = "password";
+    passwordInput.placeholder = "Password";
+    form.appendChild(passwordInput);
+
+    const confirmPasswordInput = document.createElement("input");
+    confirmPasswordInput.type = "password";
+    confirmPasswordInput.placeholder = "Confirm Password";
+    form.appendChild(confirmPasswordInput);
+
+    const emailError = document.createElement("div");
+    emailError.className = "error";
+    emailError.style.display = "none";
+    form.appendChild(emailError);
+
+    const submitButton = document.createElement("input");
+    submitButton.type = "submit";
+    submitButton.value = "Submit";
+    form.appendChild(submitButton);
+
+    submitButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        const email = emailInput.value;
+        if (!validateEmail(email)) {
+            emailError.textContent = "Please enter a valid email address.";
+            emailError.style.display = "block";
+        } else {
+            emailError.style.display = "none";
+            // You can proceed with form submission or other actions here
+        }
+    });
+
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    app.appendChild(form);
+</script>
+</body>
+</html>
